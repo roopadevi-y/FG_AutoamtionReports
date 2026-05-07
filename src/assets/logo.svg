@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 160 48" width="160" height="48">
+  <!-- Colorful wing/spark icon -->
+  <polygon points="12,38 26,10 32,28" fill="#f97316"/>
+  <polygon points="26,10 44,38 32,28" fill="#eab308"/>
+  <polygon points="8,38 26,10 18,30" fill="#3b82f6"/>
+  <!-- FG Report text -->
+  <text x="52" y="34" font-family="Arial,sans-serif" font-weight="700" font-size="22" fill="#1e3a8a" letter-spacing="1">FG Report</text>
+</svg>
