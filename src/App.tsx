@@ -1,6 +1,5 @@
 import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
 import { ThemeProvider } from './context/ThemeContext';
-import { HomePage } from './pages/HomePage';
 import { AboutPage } from './pages/AboutPage';
 import { ReportsPage } from './pages/ReportsPage';
 import { ContactPage } from './pages/ContactPage';
@@ -12,7 +11,7 @@ function App() {
     <ThemeProvider>
       <Router>
         <Routes>
-          <Route path="/" element={<HomePage />} />
+          <Route path="/" element={<ReportsPage />} />
           <Route path="/about" element={<AboutPage />} />
           <Route path="/reports" element={<ReportsPage />} />
           <Route path="/contact" element={<ContactPage />} />
@@ -24,4 +23,3 @@ function App() {
 }
 
 export default App
-

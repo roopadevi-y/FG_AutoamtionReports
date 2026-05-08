@@ -1,57 +1,52 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { Menu, X, Moon, Sun } from 'lucide-react';
-import { useTheme } from '../context/ThemeContext';
+import { Menu, X } from 'lucide-react';
 import fgLogo from '../assets/fgimage.png';
 export const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
-  const { isDark, toggle } = useTheme();
 
   const navLinks = [
     { label: 'Home', to: '/' },
     { label: 'About', to: '/about' },
     { label: 'Reports', to: '/reports' },
-    { label: 'Contact', to: '/contact' },
   ];
 
   return (
-    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-white/70 dark:bg-[#1a2744]/80 border-b border-white/40 dark:border-blue-400/20 shadow-sm dark:shadow-blue-900/30">
+    <nav className="sticky top-0 z-50 backdrop-blur-xl bg-gradient-to-r from-[#0f2142]/95 via-[#163668]/92 to-[#0f4a66]/90 border-b border-blue-300/25 shadow-sm shadow-blue-900/30">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2">
-            <img src={fgLogo} alt="FG logo" className="h-10 w-auto object-contain" />
-            <span className="font-bold text-xl tracking-wide text-blue-900 dark:text-blue-50 drop-shadow">
-              FG Test Report
+            <img src={fgLogo} alt="FG logo" className="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(56,189,248,0.35)]" />
+            <span className="font-bold text-xl tracking-wide text-blue-50 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]">
+              FG Test Reports
             </span>
           </Link>
 
           {/* Desktop Nav */}
-          <div className="hidden md:flex items-center gap-8">
+          <div className="hidden md:flex items-center gap-6">
             {navLinks.map((link) => (
               <Link
                 key={link.to}
                 to={link.to}
-                className="text-gray-700 dark:text-blue-100 hover:text-blue-500 dark:hover:text-blue-300 transition-colors font-medium"
+                className="text-blue-100 hover:text-cyan-200 transition-colors font-medium"
               >
                 {link.label}
               </Link>
             ))}
           </div>
 
-          {/* Dark Mode Toggle & Mobile Menu Button */}
+          {/* Mobile Menu Button */}
           <div className="flex items-center gap-4">
-            <button
-              onClick={toggle}
-              className="p-2 rounded-lg bg-gray-100 dark:bg-dark-700 hover:bg-gray-200 dark:hover:bg-dark-600 transition-colors"
-              aria-label="Toggle theme"
+            <Link
+              to="/contact"
+              className="px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
             >
-              {isDark ? <Sun size={20} className="text-yellow-300" /> : <Moon size={20} />}
-            </button>
-
+              Contact
+            </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg bg-gray-100 dark:bg-dark-700"
+              className="md:hidden p-2 rounded-lg bg-blue-900/70 text-blue-100"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -66,7 +61,7 @@ export const Navbar = () => {
               <Link
                 key={link.to}
                 to={link.to}
-                className="block px-4 py-2 text-gray-700 dark:text-blue-100 hover:bg-gray-100 dark:hover:bg-dark-700 rounded-lg transition-colors"
+                className="block px-4 py-2 text-blue-100 hover:bg-blue-900/60 rounded-lg transition-colors"
                 onClick={() => setIsOpen(false)}
               >
                 {link.label}

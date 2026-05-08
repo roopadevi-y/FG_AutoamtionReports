@@ -1,0 +1,5 @@
+Event Id: A753e3386-488
+Incident Name: High Voltage Incident identified - Smart Pole
+Status: CLOSED
+Start Date: 07-05-2026 10:28:25
+Actual End Date: 07-05-2026 10:30:53

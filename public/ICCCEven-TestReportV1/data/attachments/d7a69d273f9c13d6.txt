@@ -1,0 +1,1 @@
+allClosed=true; statuses=CLOSED | CLOSED | CLOSED | CLOSED | CLOSED

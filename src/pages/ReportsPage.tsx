@@ -2,9 +2,23 @@ import type { ReactElement } from 'react';
 import { useState } from 'react';
 import { BarChart3, LineChart, PieChart, TrendingUp, Zap, Cpu, Activity, FileText, Database, Radio } from 'lucide-react';
 import { Layout } from '../layouts/Layout';
-import { Card } from '../components/Card';
 
 type Vertical = 'GIM' | 'CIS' | 'AMI';
+
+const gimReports = [
+  {
+    label: 'ICCCEvent-V1',
+    href: '/ICCCEvent-V1/index.html',
+  },
+  {
+    label: 'VC-JoinCall',
+    href: '/VC-JoinCall/index.html',
+  },
+  {
+    label: 'VC-Start Call',
+    href: '/VC-Start%20Call/index.html',
+  },
+];
 
 const verticalData: Record<Vertical, { label: string; description: string; color: string; reports: { icon: ReactElement; title: string; description: string; date: string }[] }> = {
   GIM: {
@@ -104,15 +118,14 @@ const verticalData: Record<Vertical, { label: string; description: string; color
 
 export const ReportsPage = () => {
   const [activeVertical, setActiveVertical] = useState<Vertical>('GIM');
-  const current = verticalData[activeVertical];
-
+  const [selectedGimReport, setSelectedGimReport] = useState('');
   return (
     <Layout>
       {/* Header */}
       <section className="py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto text-center">
           <h1 className="text-5xl md:text-6xl font-bold text-blue-200 mb-4 drop-shadow-[0_2px_12px_rgba(96,165,250,0.22)]">
-            FG Test Report
+            FG Test Reports
           </h1>
           <p className="text-xl text-blue-100/95 drop-shadow-[0_1px_8px_rgba(30,64,175,0.2)]">
             Select a vertical to view its reports and analytics.
@@ -141,48 +154,42 @@ export const ReportsPage = () => {
         </div>
       </section>
 
-      {/* Vertical Description Banner */}
-      <section className="px-4 sm:px-6 lg:px-8 py-6">
-        <div className="max-w-7xl mx-auto">
-          <div className={`rounded-xl p-5 bg-gradient-to-r ${current.color} border border-white/20 dark:border-blue-400/20 backdrop-blur`}>
-            {current.description && (
-              <p className="text-gray-700 dark:text-blue-100 font-medium">{current.description}</p>
+      {/* GIM vertical: show View Detailed Report button only */}
+      {activeVertical === 'GIM' && (
+        <section className="py-8 px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="mx-auto mt-6 flex flex-col items-center">
+            <select
+              id="gim-report-select"
+              aria-label="Report"
+              value={selectedGimReport}
+              onChange={(event) => setSelectedGimReport(event.target.value)}
+              className="w-fit min-w-[210px] rounded-lg border border-blue-700 px-4 py-3 bg-blue-900 text-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="" disabled hidden>
+                Choose a Report
+              </option>
+              {gimReports.map((report) => (
+                <option key={report.label} value={report.href}>
+                  {report.label}
+                </option>
+              ))}
+            </select>
+
+            {selectedGimReport && (
+              <div className="flex justify-center mt-8">
+                <a
+                  href={selectedGimReport}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-4 rounded-lg bg-blue-600 text-white font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors"
+                >
+                  View Detailed Report
+                </a>
+              </div>
             )}
           </div>
-        </div>
-      </section>
-
-      {/* Reports Grid */}
-      <section className="py-8 px-4 sm:px-6 lg:px-8 pb-20">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-            {current.reports.map((report, index) => (
-              <Card key={`${activeVertical}-${index}`} className="space-y-6 flex flex-col h-full">
-                <div>
-                  <div className="inline-block p-3 rounded-lg bg-blue-500/20 text-blue-500 dark:text-blue-300 mb-4">
-                    {report.icon}
-                  </div>
-                  {report.title && (
-                    <h3 className="text-2xl font-bold text-gray-900 dark:text-blue-50 mb-2">
-                      {report.title}
-                    </h3>
-                  )}
-                  {report.description && (
-                    <p className="text-gray-600 dark:text-blue-200">
-                      {report.description}
-                    </p>
-                  )}
-                </div>
-                {report.date && (
-                  <div className="mt-auto space-y-4">
-                    <p className="text-sm text-gray-500 dark:text-blue-300">{report.date}</p>
-                  </div>
-                )}
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
+        </section>
+      )}
     </Layout>
   );
 };
