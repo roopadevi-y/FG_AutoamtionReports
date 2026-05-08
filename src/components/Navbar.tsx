@@ -37,16 +37,16 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-2 md:gap-4">
+          <div className="flex items-center gap-1 sm:gap-2 md:gap-4">
             <Link
               to="/automation-stack"
-              className="hidden md:inline-flex px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+              className="inline-flex px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-lg bg-cyan-500/85 text-slate-950 text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap hover:bg-cyan-400 transition-colors"
             >
               Automation Stack
             </Link>
             <Link
               to="/contact"
-              className="hidden md:inline-flex px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+              className="inline-flex px-2 py-1.5 sm:px-3 sm:py-2 md:px-4 md:py-2 rounded-lg bg-cyan-500/85 text-slate-950 text-xs sm:text-sm md:text-base font-semibold whitespace-nowrap hover:bg-cyan-400 transition-colors"
             >
               Contact
             </Link>
