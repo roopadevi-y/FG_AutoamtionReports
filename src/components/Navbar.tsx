@@ -19,7 +19,7 @@ export const Navbar = () => {
           <Link to="/" className="flex items-center gap-2">
             <img src={fgLogo} alt="FG logo" className="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(56,189,248,0.35)]" />
             <span className="font-bold text-xl tracking-wide text-blue-50 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]">
-              FG Test Reports
+              Accelerated with AI-Driven Testing Frameworks 🚀
             </span>
           </Link>
 
@@ -38,6 +38,12 @@ export const Navbar = () => {
 
           {/* Mobile Menu Button */}
           <div className="flex items-center gap-4">
+            <Link
+              to="/automation-stack"
+              className="px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+            >
+              Automation Stack
+            </Link>
             <Link
               to="/contact"
               className="px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
