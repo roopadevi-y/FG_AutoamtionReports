@@ -34,12 +34,12 @@ const stackSections = [
 export const AutomationStackPage = () => {
   return (
     <Layout>
-      <section className="py-16 px-4 sm:px-6 lg:px-8">
+      <section className="py-12 md:py-16 px-4 sm:px-6 lg:px-8">
         <div className="max-w-6xl mx-auto text-center">
-          <h1 className="text-4xl md:text-5xl font-bold text-blue-100 mb-4 drop-shadow-[0_2px_12px_rgba(96,165,250,0.22)]">
+          <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-blue-100 mb-4 drop-shadow-[0_2px_12px_rgba(96,165,250,0.22)]">
             Automation Stack
           </h1>
-          <p className="text-lg md:text-xl text-blue-200/90 max-w-3xl mx-auto">
+          <p className="text-base sm:text-lg md:text-xl text-blue-200/90 max-w-3xl mx-auto">
             Core tools and frameworks powering UI, API, and performance quality at scale.
           </p>
         </div>
@@ -56,7 +56,7 @@ export const AutomationStackPage = () => {
                 key={section.title}
                 className="border border-slate-300/80 bg-slate-100/90 shadow-md shadow-slate-900/20 rounded-3xl"
               >
-                <div className="flex items-start gap-4 md:gap-5">
+                <div className="flex flex-col sm:flex-row items-start gap-4 md:gap-5">
                   <div className="flex items-center gap-2 shrink-0">
                     <div className="p-3 rounded-xl bg-slate-200 text-slate-500 border border-slate-300/70">
                       <Icon size={24} />
@@ -69,8 +69,8 @@ export const AutomationStackPage = () => {
                   </div>
 
                   <div className="min-w-0">
-                    <h2 className="text-2xl font-semibold text-slate-800">{section.title}</h2>
-                    <p className="text-cyan-700 font-semibold mt-1">{section.subtitle}</p>
+                    <h2 className="text-xl sm:text-2xl font-semibold text-slate-800">{section.title}</h2>
+                    <p className="text-cyan-700 font-semibold mt-1 text-sm sm:text-base">{section.subtitle}</p>
 
                     <div className="flex flex-wrap gap-2 mt-4 mb-4">
                       {section.tools.map((tool) => (
@@ -83,7 +83,7 @@ export const AutomationStackPage = () => {
                       ))}
                     </div>
 
-                    <p className="text-slate-700 leading-relaxed text-[15px] md:text-base">
+                    <p className="text-slate-700 leading-relaxed text-sm sm:text-[15px] md:text-base">
                       {section.description}
                     </p>
                   </div>

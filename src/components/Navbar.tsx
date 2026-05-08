@@ -16,9 +16,9 @@ export const Navbar = () => {
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link to="/" className="flex items-center gap-2">
+          <Link to="/" className="flex items-center gap-2 min-w-0">
             <img src={fgLogo} alt="FG logo" className="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(56,189,248,0.35)]" />
-            <span className="font-bold text-xl tracking-wide text-blue-50 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)]">
+            <span className="hidden lg:block font-bold text-sm xl:text-xl tracking-wide text-blue-50 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] truncate max-w-[520px]">
               Accelerated with AI-Driven Testing Frameworks 🚀
             </span>
           </Link>
@@ -37,22 +37,22 @@ export const Navbar = () => {
           </div>
 
           {/* Mobile Menu Button */}
-          <div className="flex items-center gap-4">
+          <div className="flex items-center gap-2 md:gap-4">
             <Link
               to="/automation-stack"
-              className="px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+              className="hidden md:inline-flex px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
             >
               Automation Stack
             </Link>
             <Link
               to="/contact"
-              className="px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+              className="hidden md:inline-flex px-4 py-2 rounded-lg bg-cyan-500/85 text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
             >
               Contact
             </Link>
             <button
               onClick={() => setIsOpen(!isOpen)}
-              className="md:hidden p-2 rounded-lg bg-blue-900/70 text-blue-100"
+              className="md:hidden p-2 rounded-lg bg-blue-900/70 text-blue-100 border border-blue-300/25"
               aria-label="Toggle menu"
             >
               {isOpen ? <X size={24} /> : <Menu size={24} />}
@@ -73,6 +73,22 @@ export const Navbar = () => {
                 {link.label}
               </Link>
             ))}
+            <div className="pt-2 grid grid-cols-1 gap-2">
+              <Link
+                to="/automation-stack"
+                className="w-full px-4 py-2 rounded-lg bg-cyan-500/85 text-center text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Automation Stack
+              </Link>
+              <Link
+                to="/contact"
+                className="w-full px-4 py-2 rounded-lg bg-cyan-500/85 text-center text-slate-950 font-semibold hover:bg-cyan-400 transition-colors"
+                onClick={() => setIsOpen(false)}
+              >
+                Contact
+              </Link>
+            </div>
           </div>
         )}
       </div>
