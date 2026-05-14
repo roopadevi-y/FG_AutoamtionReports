@@ -1,0 +1,5 @@
+Status records for VS_TC_002 (scno=113356G233000784)
+complaintRequestNo | status
+-------------------+------------
+26051200186        | in progress
+PASSED evidence saved: D:\MyAI_Space\CIS\mPower\tests\utils\Test-Evidence\VS_TC_002-SCNumberSearch-passed-14-12-10.png
