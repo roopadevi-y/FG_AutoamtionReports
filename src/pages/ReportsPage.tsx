@@ -29,6 +29,10 @@ const cisReports = [
     label: 'Registration Blocker',
     href: '/RegistrationBlocker.html',
   },
+  {
+    label: 'All Approvals',
+    href: '/AllApprovals/index.html',
+  },
   // Add more CIS reports here if needed
 ];
 

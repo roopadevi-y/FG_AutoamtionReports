@@ -1,5 +1,0 @@
-Status records for VS_TC_004 (phno=7416879744)
-complaintRequestNo | status
--------------------+------------
-26051200186        | in progress
-PASSED evidence saved: D:\MyAI_Space\CIS\mPower\tests\utils\Test-Evidence\VS_TC_004-PhoneNumberSearch-passed-14-12-10.png
