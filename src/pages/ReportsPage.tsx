@@ -18,22 +18,41 @@ const gimReports = [
     label: 'VC-Start Call',
     href: '/VC-Start%20Call/index.html',
   },
+  {
+    label: 'KPI-Alert',
+    href: '/KPI-Alert/index.html',
+  },
+  {
+    label: 'MassNotification',
+    href: '/GIS%20Vertical/MassNotification.html',
+  },
 ];
 
 const cisReports = [
   {
-    label: 'ViewStatusV1.0',
-    href: '/ViewStatusV1.0/index.html',
+    label: 'RegdComplaint',
+    href: '/RegdComplaint/index.html',
   },
   {
-    label: 'Registration Blocker',
-    href: '/RegistrationBlocker.html',
+    label: 'DuplicateComplaint',
+    href: '/DuplicateComplaint/index.html',
   },
   {
-    label: 'All Approvals',
-    href: '/AllApprovals/index.html',
+    label: 'WorkFlow-RectClosed',
+    href: '/WorkFlow-RectClosed/index.html',
   },
-  // Add more CIS reports here if needed
+  {
+    label: 'WorkFlow-Rectified',
+    href: '/WorkFlow-Rectified/index.html',
+  },
+  {
+    label: 'WorkFlow -rejectedInvalid',
+    href: '/WorkFlow%20-rejectedInvalid/index.html',
+  },
+  {
+    label: 'ViewStatusAll',
+    href: '/ViewStatusAll/index.html',
+  },
 ];
 
 const verticalData: Record<Vertical, { label: string; description: string; color: string; reports: { icon: ReactElement; title: string; description: string; date: string }[] }> = {

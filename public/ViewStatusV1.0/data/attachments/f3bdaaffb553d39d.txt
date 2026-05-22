@@ -1,5 +1,0 @@
-Status records for VS_TC_001 (complaint=26050900060)
-complaintRequestNo | status
--------------------+------------
-Complaint No       | pending
-PASSED evidence saved: D:\MyAI_Space\CIS\mPower\tests\utils\Test-Evidence\VS_TC_001-ComplaintNumberSearch-passed-14-12-10.png

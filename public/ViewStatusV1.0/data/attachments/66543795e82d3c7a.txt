@@ -1,1 +1,0 @@
-PASSED evidence saved: D:\MyAI_Space\CIS\mPower\tests\utils\Test-Evidence\VS_TC_008-Phonenumbershouldacceptnumericdigitsonly-passed-14-12-12.png
