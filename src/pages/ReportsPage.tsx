@@ -38,6 +38,10 @@ const cisReports = [
     href: '/DuplicateComplaint/index.html',
   },
   {
+    label: 'RegistrationTC',
+    href: '/RegistrationTC/index.html',
+  },
+  {
     label: 'WorkFlow-RectClosed',
     href: '/WorkFlow-RectClosed/index.html',
   },
