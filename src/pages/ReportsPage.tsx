@@ -20,7 +20,7 @@ const gimReports = [
   },
   {
     label: 'KPI-Alert',
-    href: '/KPI-Alert/index.html',
+    href: '/KPI-Alert/KPI-Alert.html',
   },
   {
     label: 'MassNotification',
@@ -29,10 +29,10 @@ const gimReports = [
 ];
 
 const cisReports = [
-  {
-    label: 'RegdComplaint',
-    href: '/RegdComplaint/index.html',
-  },
+    {
+      label: 'WithOutSCNoTC',
+      href: '/WithOutSCNoTC/index.html',
+    },
   {
     label: 'DuplicateComplaint',
     href: '/DuplicateComplaint/index.html',
