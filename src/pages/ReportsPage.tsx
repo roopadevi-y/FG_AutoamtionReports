@@ -29,10 +29,18 @@ const gimReports = [
 ];
 
 const cisReports = [
-    {
-      label: 'WithOutSCNoTC',
-      href: '/WithOutSCNoTC/index.html',
-    },
+  {
+    label: 'Config-StatusWorkflowTCs',
+    href: '/CIS/Config-StatusWorkflowTCs/index.html',
+  },
+  {
+    label: 'Config-ComplaintTypTCs',
+    href: '/CIS/Config-ComplaintTypTCs/index.html',
+  },
+  {
+    label: 'WithOutSCNoTC',
+    href: '/WithOutSCNoTC/index.html',
+  },
   {
     label: 'DuplicateComplaint',
     href: '/DuplicateComplaint/index.html',

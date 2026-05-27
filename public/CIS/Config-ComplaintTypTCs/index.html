@@ -1,0 +1,626 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Test Execution Report — Complaint Type Configuration</title>
+<style>
+  :root {
+    --green:   #16a34a;
+    --green-bg:#dcfce7;
+    --red:     #dc2626;
+    --red-bg:  #fee2e2;
+    --blue:    #2563eb;
+    --blue-bg: #dbeafe;
+    --orange:  #d97706;
+    --orange-bg:#fef3c7;
+    --purple:  #7c3aed;
+    --purple-bg:#ede9fe;
+    --gray:    #6b7280;
+    --gray-bg: #f3f4f6;
+    --border:  #e5e7eb;
+    --text:    #111827;
+    --subtext: #6b7280;
+  }
+
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    background: #f8fafc;
+    color: var(--text);
+    font-size: 14px;
+    line-height: 1.6;
+  }
+
+  /* ── Header ── */
+  .header {
+    background: linear-gradient(135deg, #1e3a5f 0%, #2563eb 100%);
+    color: white;
+    padding: 36px 48px;
+  }
+  .header h1 { font-size: 24px; font-weight: 700; margin-bottom: 4px; }
+  .header .meta { opacity: 0.8; font-size: 13px; margin-top: 8px; display: flex; gap: 24px; flex-wrap: wrap; }
+  .header .meta span::before { content: '• '; opacity: 0.6; }
+  .header .meta span:first-child::before { content: ''; }
+
+  /* ── Layout ── */
+  .container { max-width: 1100px; margin: 0 auto; padding: 32px 24px; }
+
+  /* ── Info callout ── */
+  .callout {
+    border-left: 4px solid var(--blue);
+    background: var(--blue-bg);
+    border-radius: 0 8px 8px 0;
+    padding: 14px 18px;
+    margin-bottom: 28px;
+    font-size: 13px;
+    color: #1e3a8a;
+  }
+  .callout strong { display: block; margin-bottom: 4px; font-size: 14px; }
+
+  /* ── Summary cards ── */
+  .summary-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    gap: 16px;
+    margin-bottom: 32px;
+  }
+  .card {
+    background: white;
+    border-radius: 12px;
+    padding: 20px;
+    text-align: center;
+    border: 1px solid var(--border);
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+  }
+  .card .num  { font-size: 32px; font-weight: 800; line-height: 1; }
+  .card .lbl  { font-size: 12px; color: var(--subtext); margin-top: 6px; text-transform: uppercase; letter-spacing: 0.05em; }
+  .card.green .num { color: var(--green); }
+  .card.red   .num { color: var(--red); }
+  .card.blue  .num { color: var(--blue); }
+  .card.orange .num { color: var(--orange); }
+  .card.purple .num { color: var(--purple); }
+
+  /* ── Progress bar ── */
+  .progress-wrap { margin-bottom: 32px; }
+  .progress-wrap .label { font-size: 13px; color: var(--subtext); margin-bottom: 6px; }
+  .progress-wrap .bar-bg {
+    height: 10px; background: var(--border); border-radius: 99px; overflow: hidden;
+  }
+  .progress-wrap .bar-fill {
+    height: 100%; background: linear-gradient(90deg, var(--green) 0%, #22c55e 100%);
+    border-radius: 99px; transition: width 0.6s ease;
+  }
+
+  /* ── Section title ── */
+  h2 {
+    font-size: 17px;
+    font-weight: 700;
+    margin: 32px 0 14px;
+    padding-bottom: 8px;
+    border-bottom: 2px solid var(--border);
+    color: #1e3a5f;
+  }
+
+  /* ── Legend ── */
+  .legend {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+    margin-bottom: 18px;
+    font-size: 12px;
+  }
+  .legend-item { display: flex; align-items: center; gap: 6px; }
+  .dot {
+    width: 10px; height: 10px; border-radius: 50%; flex-shrink: 0;
+  }
+
+  /* ── Table ── */
+  .tbl-wrap { overflow-x: auto; margin-bottom: 12px; }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    background: white;
+    border-radius: 10px;
+    overflow: hidden;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.06);
+    border: 1px solid var(--border);
+  }
+  thead th {
+    background: #1e3a5f;
+    color: white;
+    padding: 11px 14px;
+    text-align: left;
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
+  }
+  tbody tr { border-bottom: 1px solid var(--border); }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: #f8fafc; }
+  td { padding: 10px 14px; vertical-align: middle; font-size: 13px; }
+
+  .tc-id { font-family: 'Courier New', monospace; font-weight: 700; font-size: 12px; color: #1e3a5f; white-space: nowrap; }
+
+  /* ── Type badges ── */
+  .badge {
+    display: inline-block;
+    padding: 2px 10px;
+    border-radius: 99px;
+    font-size: 11px;
+    font-weight: 600;
+    white-space: nowrap;
+  }
+  .badge-pos   { background: var(--green-bg);  color: var(--green);  }
+  .badge-neg   { background: var(--orange-bg); color: var(--orange); }
+  .badge-e2e   { background: var(--purple-bg); color: var(--purple); }
+
+  /* ── Result badges ── */
+  .result {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    padding: 3px 12px;
+    border-radius: 99px;
+    font-size: 12px;
+    font-weight: 700;
+    white-space: nowrap;
+  }
+  .result-pass    { background: var(--green-bg);  color: var(--green);  }
+  .result-fail    { background: var(--red-bg);    color: var(--red);    }
+  .result-pending { background: var(--gray-bg);   color: var(--gray);   }
+
+  /* ── Negative note column ── */
+  .neg-note {
+    font-size: 11px;
+    color: var(--orange);
+    font-style: italic;
+  }
+
+  /* ── Callout boxes ── */
+  .note-box {
+    border-radius: 10px;
+    padding: 16px 20px;
+    margin: 20px 0;
+    font-size: 13px;
+  }
+  .note-box.green  { background: var(--green-bg);  border: 1px solid #86efac; color: #14532d; }
+  .note-box.orange { background: var(--orange-bg); border: 1px solid #fcd34d; color: #78350f; }
+  .note-box strong { font-weight: 700; }
+
+  /* ── Section header rows ── */
+  .section-row td {
+    background: #f1f5f9;
+    font-weight: 700;
+    font-size: 12px;
+    text-transform: uppercase;
+    letter-spacing: 0.06em;
+    color: #475569;
+    padding: 7px 14px;
+  }
+
+  /* ── Footer ── */
+  footer {
+    text-align: center;
+    padding: 32px;
+    font-size: 12px;
+    color: var(--subtext);
+    border-top: 1px solid var(--border);
+    margin-top: 48px;
+  }
+</style>
+</head>
+<body>
+
+<!-- ── Header ──────────────────────────────────────────────────────────────── -->
+<div class="header">
+  <h1>Test Execution Report — Complaint Type Configuration</h1>
+  <div class="meta">
+    <span>Module: Configuration → Request/Complaint Type</span>
+    <span>Application: stage.mpower.in</span>
+    <span>Spec: ComplaintTypConfig.spec.ts</span>
+    <span>Date: 2026-05-27</span>
+    <span>Engineer: QA Automation</span>
+  </div>
+</div>
+
+<!-- ── Body ────────────────────────────────────────────────────────────────── -->
+<div class="container">
+
+  <!-- ── Sr QA note ── -->
+  <div class="callout">
+    <strong>📌 Note on Negative Test Results</strong>
+    A <strong>Negative test that shows PASS</strong> is a <strong>quality confirmation</strong> — it means the system correctly rejected invalid input or duplicate data.
+    A negative test result of <strong>FAIL</strong> means the system allowed something it should not have, which is a real defect.
+    Do not confuse "negative test type" with a bad outcome — <span style="font-weight:700">Negative PASS = System is protecting data integrity.</span>
+  </div>
+
+  <!-- ── Summary cards ── -->
+  <div class="summary-grid">
+    <div class="card blue">
+      <div class="num" id="totalCount">—</div>
+      <div class="lbl">Total Tests</div>
+    </div>
+    <div class="card green">
+      <div class="num" id="passCount">—</div>
+      <div class="lbl">Pass</div>
+    </div>
+    <div class="card red">
+      <div class="num" id="failCount">—</div>
+      <div class="lbl">Fail</div>
+    </div>
+    <div class="card orange">
+      <div class="num">5</div>
+      <div class="lbl">Negative Tests</div>
+    </div>
+    <div class="card purple">
+      <div class="num">5</div>
+      <div class="lbl">E2E Steps</div>
+    </div>
+  </div>
+
+  <!-- ── Pass rate bar ── -->
+  <div class="progress-wrap">
+    <div class="label" id="passLabel">Pass Rate — calculating…</div>
+    <div class="bar-bg"><div class="bar-fill" id="progressBar" style="width:0%"></div></div>
+  </div>
+
+  <!-- ── Legend ── -->
+  <div class="legend">
+    <div class="legend-item"><div class="dot" style="background:#16a34a"></div> Positive — validates expected happy-path behaviour</div>
+    <div class="legend-item"><div class="dot" style="background:#d97706"></div> Negative — validates system correctly rejects invalid input (PASS = system working)</div>
+    <div class="legend-item"><div class="dot" style="background:#7c3aed"></div> E2E — end-to-end lifecycle step (serial)</div>
+  </div>
+
+  <!-- ── Test Table ── -->
+  <h2>Test Case Results</h2>
+
+  <div class="tbl-wrap">
+  <table id="testTable">
+    <thead>
+      <tr>
+        <th>TC ID</th>
+        <th>Title</th>
+        <th>Type</th>
+        <th>Expected Outcome</th>
+        <th>Result</th>
+        <th>Remarks</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <!-- Section A -->
+      <tr class="section-row"><td colspan="6">Section A — Create</td></tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT001</span></td>
+        <td>Create — happy path (Maintenance Yes, Service request)</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Record saved &amp; found in grid</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT002</span></td>
+        <td>Create — duplicate name rejected</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>System shows error — duplicate blocked</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = system protecting data integrity ✓</td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT003</span></td>
+        <td>Create — empty name validation</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>"Required" error shown, form stays open</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = required-field guard is active ✓</td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT003b</span></td>
+        <td>Create — numbers / special chars rejected</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>"Only alphabets are allowed!" shown</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = input validation enforced ✓</td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT004</span></td>
+        <td>Create — Maintenance No, Complaint category</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Record saved, appears in grid</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <!-- Section B -->
+      <tr class="section-row"><td colspan="6">Section B — Update</td></tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT005</span></td>
+        <td>Update — rename and change category to Complaint</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>New name searchable, old name gone</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT006</span></td>
+        <td>Update — duplicate name rejected</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>System shows error — rename to existing name blocked</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = duplicate guard works on Update too ✓</td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT007</span></td>
+        <td>Update — re-save without any changes</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Update succeeds, record unchanged</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT008</span></td>
+        <td>Update — toggle "Is Maintenance Required" Yes → No</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Status change persists, record still visible</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <!-- Section C -->
+      <tr class="section-row"><td colspan="6">Section C — Delete</td></tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT009</span></td>
+        <td>Delete — happy path (confirm Yes)</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Record removed, absent from grid</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT010</span></td>
+        <td>Delete — cancel via "No" dialog</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>Record survives — not deleted on cancel</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = cancel guard works correctly ✓</td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT011</span></td>
+        <td>Delete — post-delete search returns no results</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Grid empty for deleted name</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <!-- Section D -->
+      <tr class="section-row"><td colspan="6">Section D — Search</td></tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT012</span></td>
+        <td>Search — existing record found in grid</td>
+        <td><span class="badge badge-pos">Positive</span></td>
+        <td>Matching row visible</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT013</span></td>
+        <td>Search — non-existent name returns empty grid</td>
+        <td><span class="badge badge-neg">Negative</span></td>
+        <td>Grid shows empty / no rows</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td class="neg-note">Negative PASS = search does not return phantom records ✓</td>
+      </tr>
+
+      <!-- Section E -->
+      <tr class="section-row"><td colspan="6">Section E — Full Lifecycle (TC-CT014, serial)</td></tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT014-A</span></td>
+        <td>Lifecycle Step 1 — Create "AutomationTest"</td>
+        <td><span class="badge badge-e2e">E2E</span></td>
+        <td>Record created and found in grid</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT014-B</span></td>
+        <td>Lifecycle Step 2 — Update → "AutomationTestEdit" (Complaint)</td>
+        <td><span class="badge badge-e2e">E2E</span></td>
+        <td>New name searchable, category updated</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT014-C</span></td>
+        <td>Lifecycle Step 3 — Re-open and re-save without changes</td>
+        <td><span class="badge badge-e2e">E2E</span></td>
+        <td>Update succeeds, record intact</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT014-D</span></td>
+        <td>Lifecycle Step 4 — Delete "AutomationTestEdit"</td>
+        <td><span class="badge badge-e2e">E2E</span></td>
+        <td>Record deleted successfully</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+      <tr data-result="pass">
+        <td><span class="tc-id">TC-CT014-E</span></td>
+        <td>Lifecycle Step 5 — Post-delete search confirms record gone</td>
+        <td><span class="badge badge-e2e">E2E</span></td>
+        <td>Grid empty — record not found after delete</td>
+        <td><span class="result result-pass">✅ PASS</span></td>
+        <td></td>
+      </tr>
+
+    </tbody>
+  </table>
+  </div>
+
+  <!-- ── Negative test explanation ── -->
+  <div class="note-box green">
+    <strong>✅ Why Negative Tests Passing = System Quality Confirmed</strong><br><br>
+    <table style="border:none;box-shadow:none;background:transparent;width:100%">
+      <thead>
+        <tr>
+          <th style="background:transparent;color:#14532d;padding:4px 10px;font-size:12px;text-align:left;border-bottom:1px solid #86efac">Test</th>
+          <th style="background:transparent;color:#14532d;padding:4px 10px;font-size:12px;text-align:left;border-bottom:1px solid #86efac">What "PASS" confirms</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr style="border:none">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT002</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">System prevents duplicate Type names on Create — data uniqueness is enforced</td>
+        </tr>
+        <tr style="border:none;background:rgba(255,255,255,0.4)">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT003</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">Required-field validation fires — cannot save blank Type name</td>
+        </tr>
+        <tr style="border:none">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT003b</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">Input sanitisation active — "Only alphabets are allowed" message triggered correctly</td>
+        </tr>
+        <tr style="border:none;background:rgba(255,255,255,0.4)">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT006</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">Duplicate guard also works on Update — renaming to an existing name is blocked</td>
+        </tr>
+        <tr style="border:none">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT010</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">Delete confirmation dialog works — clicking "No" correctly aborts the operation</td>
+        </tr>
+        <tr style="border:none;background:rgba(255,255,255,0.4)">
+          <td style="padding:5px 10px;font-weight:600;color:#166534;font-size:12px">TC-CT013</td>
+          <td style="padding:5px 10px;color:#166534;font-size:12px">Search does not fabricate results — non-existent names return empty grid</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <!-- ── What FAIL would mean ── -->
+  <div class="note-box orange">
+    <strong>⚠️ What a Negative Test FAIL Would Mean (defect)</strong><br><br>
+    <ul style="padding-left:18px;margin-top:8px;font-size:13px;display:grid;gap:6px">
+      <li><strong>TC-CT002 FAIL</strong> — System saved a duplicate Type name → data integrity defect</li>
+      <li><strong>TC-CT003 FAIL</strong> — System saved a record with an empty name → required-field validation missing</li>
+      <li><strong>TC-CT003b FAIL</strong> — System accepted numbers/special characters → input validation broken</li>
+      <li><strong>TC-CT006 FAIL</strong> — System allowed rename to an existing name → uniqueness check missing on Update</li>
+      <li><strong>TC-CT010 FAIL</strong> — Record was deleted after clicking "No" → confirmation dialog not wired correctly</li>
+      <li><strong>TC-CT013 FAIL</strong> — A deleted/non-existent record appeared in search → ghost data or stale cache bug</li>
+    </ul>
+  </div>
+
+  <!-- ── Coverage Summary ── -->
+  <h2>Coverage Summary</h2>
+  <div class="tbl-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>Category</th>
+        <th>Tests</th>
+        <th>Pass</th>
+        <th>Fail</th>
+        <th>Coverage</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Section A — Create</td>
+        <td>5</td>
+        <td style="color:var(--green);font-weight:700">5</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+      <tr>
+        <td>Section B — Update</td>
+        <td>4</td>
+        <td style="color:var(--green);font-weight:700">4</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+      <tr>
+        <td>Section C — Delete</td>
+        <td>3</td>
+        <td style="color:var(--green);font-weight:700">3</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+      <tr>
+        <td>Section D — Search</td>
+        <td>2</td>
+        <td style="color:var(--green);font-weight:700">2</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+      <tr>
+        <td>Section E — E2E Lifecycle</td>
+        <td>5 steps</td>
+        <td style="color:var(--green);font-weight:700">5</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+      <tr style="font-weight:700;background:#f1f5f9">
+        <td>Total</td>
+        <td>19</td>
+        <td style="color:var(--green)">19</td>
+        <td>0</td>
+        <td><span class="badge badge-pos">100%</span></td>
+      </tr>
+    </tbody>
+  </table>
+  </div>
+
+</div>
+
+<footer>
+  Complaint Type Configuration — Automation Test Report &nbsp;|&nbsp; stage.mpower.in &nbsp;|&nbsp; Generated 2026-05-27
+</footer>
+
+<script>
+  // ── Dynamic pass-rate calculation ───────────────────────────────────────────
+  document.addEventListener('DOMContentLoaded', () => {
+    const rows  = document.querySelectorAll('#testTable tbody tr[data-result]');
+    const total = rows.length;
+    let   pass  = 0, fail = 0;
+
+    rows.forEach(r => {
+      if (r.dataset.result === 'pass')    pass++;
+      else if (r.dataset.result === 'fail') fail++;
+    });
+
+    const pct = total ? Math.round((pass / total) * 100) : 0;
+
+    document.getElementById('totalCount').textContent   = total;
+    document.getElementById('passCount').textContent    = pass;
+    document.getElementById('failCount').textContent    = fail;
+    document.getElementById('passLabel').textContent    = `Pass Rate — ${pass} / ${total} tests passed (${pct}%)`;
+    document.getElementById('progressBar').style.width  = `${pct}%`;
+  });
+</script>
+
+</body>
+</html>
