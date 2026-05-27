@@ -1,4 +1,164 @@
 <!DOCTYPE html>
+<<<<<<< HEAD
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Test Report: Blocker – Mandal Dropdown Not Selectable</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', Arial, sans-serif;
+      margin: 0;
+      background: linear-gradient(120deg, #f8fafc 0%, #e3e9f7 100%);
+      color: #222;
+      min-height: 100vh;
+    }
+    .container {
+      max-width: 700px;
+      margin: 2em auto;
+      background: #fff;
+      border-radius: 18px;
+      box-shadow: 0 4px 24px 0 rgba(44,62,80,0.10);
+      padding: 2.5em 2em 2em 2em;
+    }
+    .blocker {
+      color: #e74c3c;
+      font-weight: bold;
+      letter-spacing: 1px;
+    }
+    .section {
+      margin-bottom: 2em;
+    }
+    .screenshot {
+      border: 1px solid #e1e4ea;
+      background: #f8fafc;
+      padding: 1.5em;
+      border-radius: 12px;
+      text-align: center;
+      margin: 0 auto 2em auto;
+      max-width: 95%;
+      box-sizing: border-box;
+    }
+    code, pre {
+      background: #f4f4f4;
+      padding: 0.2em 0.4em;
+      border-radius: 4px;
+      font-size: 1em;
+    }
+    h1 {
+      color: #2c3e50;
+      font-size: 2.1em;
+      margin-bottom: 0.5em;
+      text-align: center;
+    }
+    h2 {
+      color: #34495e;
+      font-size: 1.2em;
+      margin-bottom: 0.5em;
+      border-left: 4px solid #e74c3c;
+      padding-left: 0.5em;
+    }
+    ul, ol {
+      margin-left: 1.5em;
+    }
+    .impact, .recommendation {
+      background: #fef6f6;
+      border-left: 4px solid #e74c3c;
+      padding: 1em 1.5em;
+      border-radius: 8px;
+      margin-bottom: 2em;
+    }
+    .status {
+      display: inline-block;
+      background: #e74c3c;
+      color: #fff;
+      border-radius: 6px;
+      padding: 0.2em 0.7em;
+      font-size: 1em;
+      margin-left: 0.5em;
+    }
+    .screenshot img {
+      display: block;
+      margin: 1em auto 0 auto;
+      max-width: 95%;
+      max-height: 350px;
+      border-radius: 8px;
+      box-shadow: 0 2px 12px 0 rgba(44,62,80,0.10);
+      border: 2px solid #e74c3c;
+      background: #fff;
+    }
+    .screenshot .missing {
+      color: #e74c3c;
+      font-size: 1.1em;
+      margin-top: 1em;
+      font-weight: bold;
+    }
+    @media (max-width: 800px) {
+      .container { padding: 1em; }
+      h1 { font-size: 1.3em; }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Test Report: <span class="blocker">BLOCKER</span> – Mandal Dropdown Not Selectable</h1>
+
+    <div class="section">
+      <h2>Test Details</h2>
+      <ul>
+        <li><strong>Test Case:</strong> Registration Workflow – Mandal Dropdown Selection</li>
+        <li><strong>Test File:</strong> <code>test-1.spec.ts</code></li>
+        <li><strong>Step:</strong> Select Mandal (e.g., "KADIAM")</li>
+        <li><strong>Status:</strong> <span class="status">Blocker</span></li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Steps to Reproduce</h2>
+      <ol>
+        <li>Login to the application.</li>
+        <li>Navigate to Registration.</li>
+        <li>Fill/select all fields up to Mandal selection.</li>
+        <li>Attempt to select Mandal (e.g., "KADIAM").</li>
+      </ol>
+    </div>
+
+    <div class="section">
+      <h2>Actual Result</h2>
+      <ul>
+        <li>The Mandal dropdown did not display the expected options or was not selectable.</li>
+        <li>The test failed at this step and could not proceed further.</li>
+      </ul>
+    </div>
+
+    <div class="section">
+      <h2>Error Message</h2>
+      <pre style="white-space: pre-wrap; word-break: break-word;">BLOCKER: Mandal dropdown did not populate or 'KADIAM' option not found.\nCannot proceed with mandatory field selection.\nScreenshot saved as <strong>blocker_mandal_dropdown.png</strong>.<br>\n<br>\n<b>UI Alert:</b> No village data found this mandal.</pre>
+    </div>
+
+    <div class="section screenshot">
+      <h2>Evidence (Screenshot)</h2>
+      <p>Screenshot captured at failure:</p>
+      <img src="blocker_mandal_dropdown_actual.png" alt="Blocker Screenshot" onerror="this.style.display='none';document.getElementById('missing-img').style.display='block';">
+      <div id="missing-img" class="missing" style="display:none;">Screenshot not found.<br>Place <code>blocker_mandal_dropdown_actual.png</code> in the same folder as this report to display it here.</div>
+    </div>
+
+    <div class="section impact">
+      <h2>Impact</h2>
+      <ul>
+        <li>Registration workflow cannot be automated or manually completed for this scenario.</li>
+        <li>Further test steps are blocked.</li>
+      </ul>
+    </div>
+
+    <div class="section recommendation">
+      <h2>Recommendation</h2>
+      <ul>
+        <li>Investigate why the Mandal dropdown is not populating after selecting the previous fields.</li>
+        <li>Check for backend/API issues, data dependencies, or UI bugs.</li>
+      </ul>
+    </div>
+  </div>
+=======
 <html dir="ltr" lang="en">
 <head>
     <meta charset="utf-8">
@@ -41,5 +201,6 @@
           'single_file': false
         });
     </script>
+>>>>>>> 6c95be28ae5245faaebcf02dac9ae81f14ef6545
 </body>
 </html>

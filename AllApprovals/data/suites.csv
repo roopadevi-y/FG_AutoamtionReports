@@ -1,0 +1,4 @@
+"DESCRIPTION","DURATION IN MS","NAME","PARENT SUITE","START TIME","STATUS","STOP TIME","SUB SUITE","SUITE","TEST CLASS","TEST METHOD"
+"","8136","TC-002: In Progress → Rectified","chromium","2026-05-15","passed","2026-05-15","","tests\Approvals_TC.spec.ts","",""
+"","7287","TC-003: Rectified → Acknowledged","chromium","2026-05-15","passed","2026-05-15","","tests\Approvals_TC.spec.ts","",""
+"","9460","TC-001: Pending → In Progress","chromium","2026-05-15","passed","2026-05-15","","tests\Approvals_TC.spec.ts","",""

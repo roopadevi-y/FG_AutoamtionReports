@@ -18,6 +18,53 @@ const gimReports = [
     label: 'VC-Start Call',
     href: '/VC-Start%20Call/index.html',
   },
+  {
+    label: 'KPI-Alert',
+    href: '/KPI-Alert/KPI-Alert.html',
+  },
+  {
+    label: 'MassNotification',
+    href: '/GIS%20Vertical/MassNotification.html',
+  },
+];
+
+const cisReports = [
+  {
+    label: 'Config-StatusWorkflowTCs',
+    href: '/CIS/Config-StatusWorkflowTCs/index.html',
+  },
+  {
+    label: 'Config-ComplaintTypTCs',
+    href: '/CIS/Config-ComplaintTypTCs/index.html',
+  },
+  {
+    label: 'WithOutSCNoTC',
+    href: '/WithOutSCNoTC/index.html',
+  },
+  {
+    label: 'DuplicateComplaint',
+    href: '/DuplicateComplaint/index.html',
+  },
+  {
+    label: 'RegistrationTC',
+    href: '/RegistrationTC/index.html',
+  },
+  {
+    label: 'WorkFlow-RectClosed',
+    href: '/WorkFlow-RectClosed/index.html',
+  },
+  {
+    label: 'WorkFlow-Rectified',
+    href: '/WorkFlow-Rectified/index.html',
+  },
+  {
+    label: 'WorkFlow -rejectedInvalid',
+    href: '/WorkFlow%20-rejectedInvalid/index.html',
+  },
+  {
+    label: 'ViewStatusAll',
+    href: '/ViewStatusAll/index.html',
+  },
 ];
 
 const verticalData: Record<Vertical, { label: string; description: string; color: string; reports: { icon: ReactElement; title: string; description: string; date: string }[] }> = {
@@ -119,6 +166,7 @@ const verticalData: Record<Vertical, { label: string; description: string; color
 export const ReportsPage = () => {
   const [activeVertical, setActiveVertical] = useState<Vertical>('GIM');
   const [selectedGimReport, setSelectedGimReport] = useState('');
+  const [selectedCisReport, setSelectedCisReport] = useState('');
   return (
     <Layout>
       {/* Header */}
@@ -179,6 +227,43 @@ export const ReportsPage = () => {
               <div className="flex justify-center mt-8">
                 <a
                   href={selectedGimReport}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-block px-8 py-4 rounded-lg bg-blue-600 text-white font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors"
+                >
+                  View Detailed Report
+                </a>
+              </div>
+            )}
+          </div>
+        </section>
+      )}
+
+      {/* CIS vertical: show View Detailed Report button only */}
+      {activeVertical === 'CIS' && (
+        <section className="py-8 px-4 sm:px-6 lg:px-8 pb-20">
+          <div className="mx-auto mt-6 flex flex-col items-center">
+            <select
+              id="cis-report-select"
+              aria-label="Report"
+              value={selectedCisReport}
+              onChange={(event) => setSelectedCisReport(event.target.value)}
+              className="w-fit min-w-[210px] rounded-lg border border-blue-700 px-4 py-3 bg-blue-900 text-blue-100 focus:outline-none focus:ring-2 focus:ring-blue-400"
+            >
+              <option value="" disabled hidden>
+                Choose a Report
+              </option>
+              {cisReports.map((report) => (
+                <option key={report.label} value={report.href}>
+                  {report.label}
+                </option>
+              ))}
+            </select>
+
+            {selectedCisReport && (
+              <div className="flex justify-center mt-8">
+                <a
+                  href={selectedCisReport}
                   target="_blank"
                   rel="noopener noreferrer"
                   className="inline-block px-8 py-4 rounded-lg bg-blue-600 text-white font-bold text-lg shadow-lg hover:bg-blue-700 transition-colors"

@@ -17,7 +17,7 @@ export const Navbar = () => {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link to="/" className="flex items-center gap-2 min-w-0">
-            <img src={fgLogo} alt="FG logo" className="h-10 w-auto object-contain drop-shadow-[0_2px_10px_rgba(56,189,248,0.35)]" />
+            <img src={fgLogo} alt="FG logo" className="h-12 md:h-14 w-auto object-contain drop-shadow-[0_2px_10px_rgba(56,189,248,0.35)]" />
             <span className="hidden lg:block font-bold text-sm xl:text-xl tracking-wide text-blue-50 drop-shadow-[0_2px_10px_rgba(59,130,246,0.35)] truncate max-w-[520px]">
               Accelerated with AI-Driven Testing Frameworks 🚀
             </span>
